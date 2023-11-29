@@ -1,0 +1,21 @@
+.sidebar{
+  overflow: hidden;
+  transition-property: width, margin-inline, padding-inline, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: var(--global-timing-function);
+  box-sizing: border-box;
+}
+.sidebar.sidebar-opened{
+  min-width: 300px;
+  width: 30vh;
+}
+
+.sidebar:not(.sidebar-opened){
+  background-color: transparent !important;
+  width: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+  & + .content{
+    margin-left: -16px;
+  }
+}
