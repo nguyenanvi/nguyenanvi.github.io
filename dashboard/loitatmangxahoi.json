@@ -1,0 +1,22 @@
+[
+  {
+    "name":"Facebook",
+    "link":"https://www.facebook.com/nguyen.anvi.2312/",
+    "img" :"./fb.png"
+  },
+  {
+    "name":"Youtube",
+    "link":"https://youtube.com",
+    "img" :"./yt.png"
+  },
+  {
+    "name":"Pinterest",
+    "link":"https://www.pinterest.com",
+    "img" :"./pinterest.png"
+  },
+  {
+    "name":"Elearning",
+    "link":"https://Elearning.ctu.edu.vn",
+    "img" :"./elearning.png"
+  }
+]

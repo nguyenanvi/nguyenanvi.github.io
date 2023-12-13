@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+      var file_monhoc = "./monhoc.json";
+      var file_loitat = "./loitat.json";
+      var file_loitatmangxahoi = "./loitatmangxahoi.json";
+
+      var file_unknownimage = "./unknown.png";
+      var file_avt = "./avt.png";
+      var file_draghandlerimg = "./drag.png";
+      var file_resetimg = "./reset.png"
+    </script>
+    <title> Dashboard </title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="monhoc.json"></script>
+
+    <!-- CDN google fonts: -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- CDN jquery: -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous">
+    </script>
+
+    <!-- custom script: -->
+    <script>
+      //get json data
+      function readTextFile(file, callback) {
+        let rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function() {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                callback(rawFile.responseText);
+            }
+        }
+        rawFile.send(null);
+      }
+
+      //check file exist
+      function checkFileExist(urlToFile) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('HEAD', urlToFile, false);
+        xhr.send();
+        
+        if (xhr.status == "404") {
+            return false;
+        } else {
+            return true;
+        }
+      }
+    </script>
+    <script>
+      function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+          /* if present, the header is where you move the DIV from:*/
+          document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+        } else {
+          /* otherwise, move the DIV from anywhere inside the DIV:*/
+          elmnt.onmousedown = dragMouseDown;
+        }
+      
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // get the mouse cursor position at startup:
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          // call a function whenever the cursor moves:
+          document.onmousemove = elementDrag;
+        }
+      
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // calculate the new cursor position:
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          // set the element's new position:
+          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+      
+        function closeDragElement() {
+          /* stop moving when mouse button is released:*/
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+
+      function resetposition(){
+        document.getElementById('mydiv').style.top = "0px";
+        document.getElementById('mydiv').style.left = "0px";
+
+      }
+      </script>
+    <style>
+      *{
+        font-family: Nunito;
+        user-select: none;
+      }
+      p,h1,h2,h3{
+        margin: 0.5rem 0rem;
+      }
+      
+      body{
+        margin:0px;
+        height: 100vh;
+        background: linear-gradient(to right top,#ff006e, #f6bd60);
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+      }
+      .thuy-tinh{
+        height: 80vh;
+        width:50vw;
+        background: linear-gradient(to right bottom, rgba(255,255,255,0.7),rgba(255,255,255,0.5));
+        border-radius: 2rem;
+        backdrop-filter:blur(1rem);
+        z-index: 3;
+        overflow: hidden;
+        display: flex;
+      }
+      @media only screen and (max-width:1024px){
+        .draghandler{
+          display: none;
+        }
+        .thuy-tinh{
+          width:100vw;
+          height:100vh;
+          border-radius:0px;
+        }
+        .avt{
+          position: relative !important;
+        }
+      }
+      [class *= "vong-tron-"]{
+        position:absolute;
+        border-radius: 50%;
+        background: linear-gradient(to right bottom, rgba(255,255,255,0.9),rgba(255,255,255,0.6));
+        z-index: -2;
+      }
+      .vong-tron-1{
+        height: 20vh;
+        width:20vh;
+        top: 10%;
+        left:20%;
+      }
+      .vong-tron-2{
+        height: 30vh;
+        width:30vh;
+        top:20%;
+        right:20%;
+      }
+      .vong-tron-3{
+        height: 25vh;
+        width:25vh;
+        bottom:3%;
+        left:40%;
+      }
+      .sidebar{
+        padding:0rem 0rem;
+        word-wrap: normal;
+        flex:1;
+        background-color: white;
+        height:inherit;
+        border-top-right-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+
+        overflow: scroll;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        transition:flex 0.5s ease;
+      }
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
+      .sidebar:hover{
+        flex:3;
+      }
+      .avt{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: fit-content;
+        width:100%;
+        margin:0rem;
+        margin-bottom: 1rem;
+        padding:0rem 0rem;
+        background: white;
+        position:sticky;
+        position:-webkit-sticky;
+        top: 0%;
+        overflow: hidden;
+      }
+      .avt>img{
+        margin:1rem;
+        width:3rem;
+        object-fit: contain;
+        border-radius: 50%;
+      }
+      .avt>p{
+        height: 1em;
+      }
+      .avt>h3{
+        height: 1.3em;
+      }
+      .avt>p,.avt>h3{
+        margin: 0px;
+        overflow: hidden;
+        word-wrap: normal;
+        color:gray;
+        text-align: center;
+        width: 100%;
+        transition: all 0.3s ease-in;
+      }
+      .sidebar:not(:hover)>.avt>p, .sidebar:not(:hover)>.avt>h3{
+        word-wrap: normal;
+        color:transparent;
+        width: 0px;
+      }
+      .cac-duong-dan{
+        width:100%;
+        padding-bottom: 2rem;
+        word-wrap: normal;
+      }
+      .cac-duong-dan>h3{
+        width: 100%;
+        height:1.3em;
+        color:gray;
+        transition:width 0.3s ease-in;
+        transition-delay: 1s;
+        overflow: hidden;
+      }
+      .sidebar:not(:hover)>.cac-duong-dan>h3{
+        width:0%;
+        color:transparent;
+      }
+      .cac-duong-dan>a{
+        color:#ff0040;
+        text-decoration: none;
+      }
+      .duong-dan{
+        min-width: max-content;
+        margin:0rem auto;
+        padding: 0.5rem 0rem;
+        height:2rem;
+        display: flex;
+        align-items: center;
+        transition: width 3s ease;
+        justify-content: center;
+      }
+      .duong-dan>img{
+        margin:0rem 0.5rem;
+        height:2rem;
+        width:2rem;
+        object-fit: contain;
+        border-radius: 50%;
+      }
+      .duong-dan>h3{
+        max-height: 2rem;
+        word-wrap: normal;
+        width: 100%;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+      .sidebar:not(:hover)>.cac-duong-dan>a>.duong-dan>h3{
+        width:0px;
+        color: transparent;
+      }
+      /* .duong-dan:hover{
+        border-radius: 1.5rem;
+        background:linear-gradient(to right,#ff006e, #f6bd60);
+      } */
+      .tkb{
+        flex:7;
+        padding: 1rem 1rem;
+        text-align: center;
+        color: rgba(0,0,0,0.7);
+        
+        overflow: scroll;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+      .tkb::-webkit-scrollbar {
+        display: none;
+      }
+      .bang-tkb{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .monhoc{
+        display: block;
+        height:fit-content;
+        min-width: 3rem;
+        max-width: 4rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        text-align: center;
+        text-decoration: none;
+      }
+      .monhoc:hover{
+        background: #fff9;
+        box-shadow: 3px 3px 15px #0003;
+      }
+      .monhoc>img{
+        height:3rem;
+        border-radius: 50%;
+      }
+      .monhoc>h4{
+        margin:0px;
+        color: black;
+      }
+      #mydiv {
+        position: absolute;
+        text-align: center;
+      }
+      .draghandler {
+        position: absolute;
+        top:10px;
+        right:10px;
+        padding: 10px;
+        cursor: move;
+        color: #fff;
+      }
+    </style>
+</head>
+<body>
+    <div id="mydiv">
+      <section class="thuy-tinh">
+        <div class="sidebar">
+          <div class="avt">
+            <img id="avtimg" src="" alt="">
+            <script>
+              document.getElementById('avtimg').setAttribute("src",file_avt);
+            </script>
+            <h3>Nguyễn An Vĩ</h3>
+            <p>ĐHCT</p>
+          </div>
+            
+          <div id="sidebarsocial" class="cac-duong-dan">
+            <h3>Mạng xã hội</h3>
+            
+
+          </div>
+        </div>
+        <div class="tkb">
+          <h2>Lớp học Online</h2>
+          <div id="onlinecourse" class="bang-tkb">
+          </div>
+          <h2>Lối tắt</h2>
+          <div id="ctushortcut" class="bang-tkb">
+          </div>
+        </div>
+          
+      </section>
+      <div id="mydivheader" class="draghandler">
+        <img id="draghandlerimg" src="">
+        <script>
+          document.getElementById('draghandlerimg').setAttribute("src",file_draghandlerimg);
+        </script>
+      </div>
+    </div>
+    <div class="vong-tron-1"></div>
+    <div class="vong-tron-2"></div>
+    <div class="vong-tron-3"></div>
+    <div id="resetposition" onclick="resetposition()">
+      <img id="resetimg" src="" alt="">
+      <script>
+        document.getElementById('resetimg').setAttribute("src",file_resetimg);
+      </script>
+    </div>
+</body>
+<script>
+  readTextFile(file_monhoc, function(text){
+    let data = JSON.parse(text);
+    let mhe = "";
+    data.forEach((element, index) => {
+      let result = checkFileExist(data[index].img);
+      if (result == false)
+          data[index].img = file_unknownimage;
+      mhe += "<a target=\"_blank\" href=\""+((data[index].link!=null)?(data[index].link):("#"))+"\" class=\"monhoc\"><img src=\""+data[index].img+"\" alt=\"\" class=\"anhmonhoc\"><h4 class=\"tenmonhoc\">"+((data[index].name!=null)?(data[index].name):("unknown"))+"</h4></a>";
+    });
+    document.getElementById('onlinecourse').insertAdjacentHTML('afterbegin',mhe);
+  });
+
+  readTextFile(file_loitat, function(text){
+    let data = JSON.parse(text);
+    let mhe = "";
+    data.forEach((element, index) => {
+      let result = checkFileExist(data[index].img);
+      if (result == false)
+          data[index].img = file_unknownimage;
+      mhe += "<a target=\"_blank\" href=\""+((data[index].link!=null)?(data[index].link):("#"))+"\" class=\"monhoc\"><img src=\""+data[index].img+"\" alt=\"\" class=\"anhmonhoc\"><h4 class=\"tenmonhoc\">"+((data[index].name!=null)?(data[index].name):("unknown"))+"</h4></a>";
+    });
+    document.getElementById('ctushortcut').insertAdjacentHTML('afterbegin',mhe);
+  });
+
+  readTextFile(file_loitatmangxahoi, function(text){
+    let data = JSON.parse(text);
+    let mhe = "";
+    data.forEach((element, index) => {
+      let result = checkFileExist(data[index].img);
+      if (result == false)
+          data[index].img = file_unknownimage;
+      mhe += "<a  target=\"_blank\" href=\""+data[index].link+"\"><div class=\"duong-dan\"><img src=\""+data[index].img+"\"><h3>"+data[index].name+"</h3></div></a>";
+    });
+    document.getElementById('sidebarsocial').insertAdjacentHTML("beforeend",mhe);
+  });
+  
+  //Make the DIV element draggagle:
+  if(document.getElementById('mydiv')!=null)
+  dragElement(document.getElementById("mydiv"));
+</script>
+</html>

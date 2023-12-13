@@ -1,0 +1,27 @@
+[
+  {
+    "name":"HTQL",
+    "link":"https://htql.ctu.edu.vn",
+    "img" :"./ctu.png"
+  },
+  {
+    "name":"ELCIT",
+    "link":"https://elcit.ctu.edu.vn",
+    "img" :"./moodle.png"
+  },
+  {
+    "name":"ELSE",
+    "link":"https://ELSE.ctu.edu.vn",
+    "img" :"./moodle.png"
+  },
+  {
+    "name":"Elearning",
+    "link":"https://Elearning.ctu.edu.vn",
+    "img" :"./elearning.png"
+  },
+  {
+    "name":"GClassroom",
+    "link":"https://classroom.google.com",
+    "img" :"./gclassroom.png"
+  }
+]
