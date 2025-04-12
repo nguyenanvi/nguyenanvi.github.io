@@ -47,67 +47,67 @@
     },
     "images": {
       "default":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "0_0":[
-        "/image/6x9/khongep.jpg"
+        "khongep.jpg"
       ],
       "1_0":[
-        "/image/6x9/khongep.jpg"
+        "khongep.jpg"
       ],
       "2_0":[
-        "/image/6x9/khongep.jpg"
+        "khongep.jpg"
       ],
       "3_0":[
-        "/image/6x9/khongep.jpg"
+        "khongep.jpg"
       ],
       "4_0":[
-        "/image/6x9/khongep.jpg"
+        "khongep.jpg"
       ],
       "0_1":[
-        "/image/6x9/hologram.gif"
+        "hologram.gif"
       ],
       "1_1":[
-        "/image/6x9/hologram.gif"
+        "hologram.gif"
       ],
       "2_1":[
-        "/image/6x9/hologram.gif"
+        "hologram.gif"
       ],
       "3_1":[
-        "/image/6x9/hologram.gif"
+        "hologram.gif"
       ],
       "4_1":[
-        "/image/6x9/hologram.gif"
+        "hologram.gif"
       ],
       "0_2":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "1_2":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "2_2":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "3_2":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "4_2":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "0_3":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "1_3":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "2_3":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "3_3":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ],
       "4_3":[
-        "/image/6x9/laminate.jpg"
+        "laminate.jpg"
       ]
     }
   },
@@ -181,19 +181,19 @@
     },
     "images": {
       "default":[
-        "/image/inhinhA3A4A5/A3.jpg"
+        "A3.jpg"
       ],
       "0_0_0":[
-        "/image/inhinhA3A4A5/A5.jpg"
+        "A5.jpg"
       ],
       "1_0_0":[
-        "/image/inhinhA3A4A5/A4.jpg"
+        "A4.jpg"
       ],
       "2_0_0":[
-        "/image/inhinhA3A4A5/A3.jpg"
+        "A3.jpg"
       ],
       "2_1_0":[
-        "/image/inhinhA3A4A5/A3.jpg"
+        "A3.jpg"
       ]
     }
   }
