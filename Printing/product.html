@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi-VN">
   <head>
     <meta charset="UTF-8" />
     <title>Bảng giá in ảnh - gửi hình em in lấy liền</title>
@@ -319,9 +319,27 @@
 
         position: relative;
         bottom: -1.1rem;
+        animation:slidebg 2s linear infinite;
       }
-      .buy--btn{
-            animation:slidebg 2s linear infinite;
+      .buy--btn:disabled{
+        background-color: #474747;
+        text-decoration:line-through;
+        cursor:no-drop;
+      }
+      .buy--btn::before{
+        display: none;
+        content: "Chọn phân loại có sẵn sau đó nhấn tư vấn.";
+      }
+      .buy--btn:disabled:hover::before{
+        display: block;
+        top: -4rem;
+        left: -1px;
+        padding: 1rem 2rem;
+        border-radius: 7px !important;
+        line-clamp: 2;
+        font-size: medium;
+        position: absolute;
+        background-color: #ff3f40;
       }
 
       .container :has(button){
@@ -335,10 +353,29 @@
         }
       }
       /* ----- Notification Popup ----- */
-      .notification-popup {
+      .notification-overlay{
+        height: 100vh !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
         position: fixed;
-        top: 20px;
-        right: 20px;
+
+        top: 0px;
+        left: 0px;
+
+        background-color: #000a;
+        z-index: 1000;
+
+        & a{
+          cursor: pointer;
+        }
+      }
+      .notification-popup {
+        max-width: 750px;
+        width: 50%;
+
+        position: fixed;
+        top: 35%;
+        left: calc(50% - (750px / 2));
         background: #fff;
         color: #000;
         padding: 15px 20px;
@@ -346,7 +383,60 @@
         border-radius: 5px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         z-index: 1000;
-        font-family: Arial, sans-serif;
+
+        &>.notification-header{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-block: 0;
+          padding-block: 0;
+          border-bottom: 1px solid #aaa;
+
+          &> h2{
+            color: #666;
+          }
+
+          & > a{
+            background-color: red;
+            color: white;
+            border-radius: 7px;
+            transform: scaleX(105%);
+            padding: 1rem;
+            transition: transform .3s ease-in-out;
+            &:hover{
+              transform: scaleY(105%) scaleX(110%);
+            }
+          }
+        }
+        &>.notification-body{
+          text-indent: 1rem;
+          font-size: x-large !important;
+          padding-block: 1rem;
+        }
+        &>.notification-footer{
+          display: flex;
+          justify-content: flex-end;
+          align-items: end;
+
+          &> a{
+            background-color: var(--main-primary);
+            color: var(--main-primary-diff);
+            border: 2px solid var(--main-primary);
+
+            &:last-child{
+              color: var(--main-primary);
+              background-color: var(--main-primary-diff);
+              border: 2px solid var(--main-primary);
+            }
+            margin-left: 8px;
+            border-radius: 7px;
+            padding:  0.5rem 1rem;
+            transition: transform .3s ease-in-out;
+            &:hover{
+              transform: scale(105%);
+            }
+          }
+        }
       }
       .notification-popup a {
         color: #ff3f40;
@@ -359,6 +449,7 @@
       #home-btn-alternative{
         display:none;
       }
+
 
       @media only screen and (max-width: 1000px) {
         .product{
@@ -381,9 +472,29 @@
         #buy--btn{
           margin-bottom: 2rem;
         }
+        .notification-popup {
+          max-width: 100%;
+          width: 100%;
+
+          position: fixed;
+          top: 35%;
+          left: 0px;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+          z-index: 1000;
+
+        }
       }
       @media only screen and (max-width: 600px) {
-      
+        .notification-footer{
+          flex-direction: column;
+          &>*{
+            width: 100%;
+            margin-left: 0;
+            margin-top: 8px;
+            text-align: center;
+          }
+        }
       }
     </style>
   </head>
@@ -459,133 +570,157 @@
       <img src="QR_zalo.png" alt="" id="qrzalo" />
     </div>
 
-  <script>
-    let selectedSpecs = {}; // To store the user's selected specification indices
+    <script>
+      let selectedSpecs = {}; // To store the user's selected specification indices
 
-    // Helper: Get query parameter from URL
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    // This function will update both the price and the displayed image(s)
-    function updateDisplay(product, defaultImages, mainImage, photoAlbum) {
-      const specKey = Object.values(selectedSpecs).join("_");
-      let buyButton = document.getElementById('buy--btn');
-
-      // Update the price
-      const productPriceElement = document.getElementById("productPrice");
-      if (product.specification[specKey] !== undefined) {
-        const price = product.specification[specKey];
-        productPriceElement.textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
-         + "đ";
-      } else {
-        productPriceElement.textContent = product.base_price;
+      // Helper: Get query parameter from URL
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
       }
-      
-      // Update the displayed image based on the specKey
-      if (specKey && product.images[specKey] && product.images[specKey].length > 0) {
-        mainImage.src = product.images[specKey][0];
-        photoAlbum.innerHTML = product.images[specKey]
-        .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
-        .join('');
-        buyButton.removeAttribute('disabled');
-      } else {
-        // Fallback to using default images if no spec-specific image is available
-        if (defaultImages.length > 0) {
-          mainImage.src = defaultImages[0];
-          photoAlbum.innerHTML = defaultImages
+
+      // This function will update both the price and the displayed image(s)
+      function updateDisplay(product, defaultImages, mainImage, photoAlbum) {
+        const specKey = Object.values(selectedSpecs).join("_");
+        let buyButton = document.getElementById('buy--btn');
+
+        // Update the price
+        const productPriceElement = document.getElementById("productPrice");
+        if (product.specification[specKey] !== undefined) {
+          const price = product.specification[specKey];
+          productPriceElement.textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+          + "đ";
+        } else {
+          productPriceElement.textContent = product.base_price;
+        }
+        
+        // Update the displayed image based on the specKey
+        if (specKey && product.images[specKey] && product.images[specKey].length > 0) {
+          mainImage.src = product.images[specKey][0];
+          photoAlbum.innerHTML = product.images[specKey]
           .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
           .join('');
-        buyButton.setAttribute('disabled', 'disabled');
-        }
-      }
-    }
-
-    // Fetch data and render the product details
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        const id = getQueryParam('id') || 0;
-        const product = data[id];
-
-        if (!product) {
-          document.body.innerHTML = `
-          <div style="display:flex; flex-direction:column;margin-inline:auto;align-items:center;text-align:center">
-            <h1>hổng thấy sản phẩm có id=${id}</h1>
-            <button style="width: fit-content" id="home-btn"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
-          </div>
-          `;
-          return;
-        }
-
-        // Update product text details
-        document.getElementById('productName').textContent = product.name;
-        document.getElementById('productCode').textContent = 'MS: ' + ('00000' + id).slice(-5);
-        document.getElementById('productPrice').textContent = product.base_price;
-
-        // Get references to image elements
-        const mainImage = document.getElementById('mainImage');
-        const photoAlbum = document.getElementById('photoAlbum');
-        const defaultImages = (product.images.default || []);
-
-        // Set default images initially
-        if (defaultImages.length > 0) {
-          mainImage.src = defaultImages[0];
-          photoAlbum.innerHTML = defaultImages
+          buyButton.removeAttribute('disabled');
+        } else {
+          // Fallback to using default images if no spec-specific image is available
+          if (defaultImages.length > 0) {
+            mainImage.src = defaultImages[0];
+            photoAlbum.innerHTML = defaultImages
             .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
             .join('');
+          buyButton.setAttribute('disabled', 'disabled');
+          }
         }
+      }
 
-        // Populate specifications – each specification will render buttons
-        const specDiv = document.getElementById('specifications');
-        for (const [specType, values] of Object.entries(product.specifications)) {
-          const specSection = document.createElement('div');
-          specSection.innerHTML = `<h4>${specType}</h4>`;
-          values.forEach((val, idx) => {
-            const btn = document.createElement('button');
-            btn.textContent = val;
-            btn.className = 'spec-option';
-            btn.dataset.specType = specType;
-            btn.dataset.specValue = idx;
-            btn.addEventListener('click', function () {
-              // Remove 'active' class for all buttons in this group, then mark this one active.
-              document.querySelectorAll(`button[data-spec-type="${specType}"]`)
-                .forEach(button => button.classList.remove('active'));
-              btn.classList.add('active');
-              selectedSpecs[specType] = idx;
-              updateDisplay(product, defaultImages, mainImage, photoAlbum);
+      // Fetch data and render the product details
+      fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          const id = getQueryParam('id') || 0;
+          const product = data[id];
+
+          if (!product) {
+            document.body.innerHTML = `
+            <div style="display:flex; flex-direction:column;margin-inline:auto;align-items:center;text-align:center">
+              <h1>hổng thấy sản phẩm có id=${id}</h1>
+              <button style="width: fit-content" id="home-btn"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
+            </div>
+            `;
+            return;
+          }
+
+          // Update product text details
+          document.getElementById('productName').textContent = product.name;
+          document.getElementById('productCode').textContent = 'MS: ' + ('00000' + id).slice(-5);
+          document.getElementById('productPrice').textContent = product.base_price;
+
+          // Get references to image elements
+          const mainImage = document.getElementById('mainImage');
+          const photoAlbum = document.getElementById('photoAlbum');
+          const defaultImages = (product.images.default || []);
+
+          // Set default images initially
+          if (defaultImages.length > 0) {
+            mainImage.src = defaultImages[0];
+            photoAlbum.innerHTML = defaultImages
+              .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+              .join('');
+          }
+
+          // Populate specifications – each specification will render buttons
+          const specDiv = document.getElementById('specifications');
+          for (const [specType, values] of Object.entries(product.specifications)) {
+            const specSection = document.createElement('div');
+            specSection.innerHTML = `<h4>${specType}</h4>`;
+            values.forEach((val, idx) => {
+              const btn = document.createElement('button');
+              btn.textContent = val;
+              btn.className = 'spec-option';
+              btn.dataset.specType = specType;
+              btn.dataset.specValue = idx;
+              btn.addEventListener('click', function () {
+                // Remove 'active' class for all buttons in this group, then mark this one active.
+                document.querySelectorAll(`button[data-spec-type="${specType}"]`)
+                  .forEach(button => button.classList.remove('active'));
+                btn.classList.add('active');
+                selectedSpecs[specType] = idx;
+                updateDisplay(product, defaultImages, mainImage, photoAlbum);
+              });
+              specSection.appendChild(btn);
             });
-            specSection.appendChild(btn);
+            specDiv.appendChild(specSection);
+          }
+
+          // CONTACT ME button functionality (captures the product section as canvas)
+          document.querySelector('.buy--btn').addEventListener('click', function (e) {
+            e.preventDefault();
+            html2canvas(document.getElementById('product')).then(canvas => {
+              const notification = document.createElement('div');
+              notification.id = 'notification';
+              notification.className = 'notification-overlay';
+              notification.innerHTML = `
+                <div class='notification-popup'>
+                  <div class="notification-header">
+                    <h2>Đã chụp màn hình!</h2>
+                    <a onclick="closeNotification()">X</a>
+                  </div>
+                  <div class="notification-body">
+                    Đã chụp màn hình, vui lòng liên hệ mình để được tư vấn trực tiếp!
+                  </div>
+                  <div class="notification-footer">
+                    <a href="mailto:nguyenanvi122333@gmail.com" target="_blank">Gửi mail</a>
+                    <a href="https://zalo.me/0939963285" target="_blank">Chat Zalo</a>
+                    <a href="tel:+84939963285" target="_blank">Gọi Điện</a>
+                    <a onclick="closeNotification()">Để sau</a>
+                  </div>
+                </div>
+              `
+              
+              const link = document.createElement('a');
+              link.download = 'gửi hình Vĩ tư vấn.png'; // File name for the download
+              link.href = canvas.toDataURL("image/png");
+              
+              // Trigger the download
+              link.click();
+
+              document.body.appendChild(notification);
+              setTimeout(() => notification.remove(), 150000);
+            });
           });
-          specDiv.appendChild(specSection);
+        })
+        .catch(error => {
+          console.error('Error loading product data:', error);
+        });
+
+        function closeNotification(){
+          try {
+            document.getElementById('notification').remove();
+          } catch (error) {
+            console.error("error closing notification:", error)
+          }        
         }
 
-        // CONTACT ME button functionality (captures the product section as canvas)
-        document.querySelector('.buy--btn').addEventListener('click', function (e) {
-          e.preventDefault();
-          html2canvas(document.getElementById('product')).then(canvas => {
-            const notification = document.createElement('div');
-            notification.className = 'notification-popup';
-            notification.innerHTML = 'Product captured, please <a href="https://zalo.me/0939963285" target="_blank">Contact me</a>';
-            
-            const link = document.createElement('a');
-            link.download = 'screenshot.png'; // File name for the download
-            link.href = canvas.toDataURL("image/png");
-            
-            // Trigger the download
-            link.click();
-
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 15000);
-          });
-        });
-      })
-      .catch(error => {
-        console.error('Error loading product data:', error);
-      });
-
-  </script>
-
+    </script>
   </body>
 </html>
