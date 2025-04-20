@@ -1,8 +1,8 @@
 [
   {
     "code":"001",
-    "name": "IN HÌNH 6x9",
-    "base_price": "1.000đ - 5.000đ",
+    "name": "in hình 6x9",
+    "base_price": "1.000đ - 37.000đ",
     "currency": "VND",
     "specifications": {
       "Loại giấy": [
@@ -113,8 +113,8 @@
   },
   {
     "code":"002",
-    "name": "IN HÌNH KHỔ A3, A4, A5",
-    "base_price": "1.000đ - 25.000đ",
+    "name": "in hình khổ A3, A4, A5",
+    "base_price": "1.000đ - 29.000đ",
     "currency": "VND",
     "specifications": {
       "Cỡ giấy": ["A5", "A4", "A3"],
@@ -181,7 +181,7 @@
     },
     "images": {
       "default":[
-        "A3.jpg"
+        "A3-default.jpg"
       ],
       "0_0_0":[
         "A5.jpg"

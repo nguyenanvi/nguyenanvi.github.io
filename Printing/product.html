@@ -1,265 +1,463 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Product Details</title>
-  <!-- --- Include html2canvas Library --- -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <style>
-    /* ----- Global ----- */
-    * {
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      padding-block: 5rem;
-      font-family: "Raleway", sans-serif;
-    }
-    h3 {
-      font-size: 0.7em;
-      letter-spacing: 1.2px;
-      color: #a6a6a6;
-    }
-    img {
-      max-width: 100%;
-      filter: drop-shadow(1px 1px 3px #a6a6a6);
-    }
-    button.normal-btn{
-      padding-inline: 30px;
-      height: 3rem;
-      background-color: #01e37f;
-      color: white;
-      border: none;
-      border-radius: 8px;
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bảng giá in ảnh - gửi hình em in lấy liền</title>
+    <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
+    <meta name="robots" content="index, follow" />
 
-      &>*{
-        text-decoration: none;
-        color: white;
+    <meta name="author" content="An Vĩ - Dịch vụ in ảnh tại An Giang" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta name="description" content="Dịch vụ in ảnh giá rẻ: in ảnh 6x9, A3, A4, A5, ảnh chân dung. Ép nhựa, in lấy ngay. Gửi hình qua email, Zalo hoặc điện thoại. Liên hệ ngay!" />
+    <meta name="keywords" content="in ảnh, dịch vụ in ảnh, in ảnh lấy ngay, ép nhựa, in ảnh giá rẻ, An Giang" />
+
+    <meta property="og:title" content="Dịch vụ in ảnh tại An Giang" />
+    <meta property="og:description" content="In ảnh 6x9, A3, A4, A5, chân dung, ép nhựa, in lấy ngay. Liên hệ ngay để nhận ảnh chất lượng cao!" />
+    <meta property="og:image" content="IMG_1197.jpg" />
+    <meta property="og:url" content="https://nguyenanvi.github.io/Printing" />
+    <meta property="og:type" content="website" />
+
+    <script src="html2canvas.js"></script>
+
+    <style>
+      @font-face {
+        font-family: "Quicksand";
+        src: url("Quicksand-SemiBold.ttf") format("woff2");
       }
-      font-size: larger;
-      font-weight: bolder;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-    /* ----- Product Section ----- */
-    .product {
-      margin-inline: auto;
-      display: flex;
-      flex-direction: row;
-      padding: 2rem;
-      width: 100%;
-      max-width: 750px;
-      background-color: white;
-      position: relative;
-    }
-    /* ----- Photo Section ----- */
-    .product__photo {
-      position: relative;
-      margin-right: 2rem;
-    }
-    .photo-container {
-      display: flex;
-      flex-direction: column;
-    }
-    .photo-main {
-      display: flex;
-      flex-direction: column;
-    }
-    .photo-main img {
-      box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
-      border-radius: 16px;
-      height: 400px ;
-      width: auto;
-      aspect-ratio: 1/1;
-      object-fit: cover ;
-    }
-    .photo-album {
-      height: fit-content;
-      padding: 0.7em 1em;
-      border-radius: 0 0 6px 6px;
-      background-color: #fff;
-    }
-    .photo-album ul {
-      display: flex;
-      justify-content: space-around;
-      padding: 0;
-      list-style: none;
-    }
-    .photo-album li {
-      width: 75px;
-      height: 75px;
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 0 2px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-    /* ----- Informations Section ----- */
-    .product__info {
-      height: fit-content;
-      padding: 0 2rem;
-    }
-    .title h1 {
-      margin-bottom: 0em;
-      color: #4c4c4c;
-      font-size: 1.5em;
-      font-weight: 900;
-    }
-    .title span {
-      font-size: 0.7em;
-      color: #a6a6a6;
-    }
-    .price {
-      color: #ff3f40;
-      font-size: 1.2em;
-    }
-    .price span {
-      padding-left: 0.15em;
-      font-size: 2em;
-      margin: 0;
-    }
-    .variant {
-      overflow: auto;
-    }
-    /* ----- Button Styles for Specifications ----- */
-    .spec-option {
-      display: inline-block;
-      margin: 5px;
-      padding: 10px 15px;
-      background-color: #fff;
-      color: #0172e3;
-      border: 2px solid #0172e3;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: medium;
-      font-weight: bold;
-    }
-    .spec-option:hover {
-      background-color: #b6daff;
-    }
-    .spec-option.active {
-      background-color: #0172e3;
-      color: #fff;
-    }
-    /* ----- Buy Button ----- */
-    .buy--btn {
-      border: none;
-      color: #fff;
-      box-shadow: 2px 2px 25px -7px #4c4c4c;
-      cursor: pointer;
-      border-radius: 7px;
 
-      width:calc(10em + 6px);
-      height:calc(3em + 6px);
-      font-size:1.5em;
-      font-weight:bold;
+      :root {
+        --main-primary: #220401;
+        --main-primary-diff: #fff;
+        --main-secondary: #fff;
+        --main-secondary-diff: #000;
+        --body: #f2e2d5;
 
-      position: relative;
-      bottom: -1.1rem;
-    }
-    .buy--btn{
-          animation:slidebg 2s linear infinite;
-    }
-
-    @keyframes slidebg {
-      to {
-        background-position:10em;
+        font-family: "Quicksand", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
       }
-    }
-    /* ----- Footer ----- */
-    footer {
-      padding: 1em;
-      text-align: center;
-      color: #fff;
-    }
-    footer a {
-      color: #4c4c4c;
-    }
-    footer a:hover {
-      color: #ff3f40;
-    }
-    /* ----- Notification Popup ----- */
-    .notification-popup {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #fff;
-      color: #000;
-      padding: 15px 20px;
-      border: 1px solid #aaa;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      z-index: 1000;
-      font-family: Arial, sans-serif;
-    }
-    .notification-popup a {
-      color: #ff3f40;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .notification-popup a:hover {
-      text-decoration: underline;
-    }
-    a.beautylink {
-      box-shadow: inset 0 0 0 0 #004d2c;
-      color: #fff;
-      margin: 0 -.25rem;
-      padding: 0 .25rem;
-      transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-    }
-    a.beautylink:hover {
-      box-shadow: inset 100px 0 0 0 #004d2c;
-      color: white;
-    }
 
-    @media only screen and (max-width: 1000px) {
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: var(--body);
+      }
+      body > * {
+        margin-inline: auto !important;
+        max-width: 1000px !important;
+        overflow: hidden;
+      }
+      .container {
+        background-color: var(--main-secondary);
+        color: var(--main-secondary-diff);
+
+        padding-inline: 2rem;
+        padding-block: 1rem;
+        margin: 2rem;
+
+        & > h1 {
+          text-align: center;
+          font-size: medium;
+        }
+      }
+      .container:has(.header) {
+        padding: 0 !important;
+      }
+      .container.contact {
+        margin-bottom: 0;
+      }
+      .header {
+        overflow: hidden;
+        max-height: 200px;
+        height: fit-content;
+        color: #fff;
+        display: flex;
+        align-items: center;
+
+        & > img {
+          width: 100%;
+        }
+        & > p {
+          font-size: larger;
+          background-color: var(--main-primary);
+          color: var(--main-primary-diff);
+          position: absolute;
+          padding: 2rem;
+          z-index: 999;
+        }
+      }
+      .decor-icons {
+        background-color: transparent !important;
+        padding-block: 0 !important;
+        margin-block: 0 !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        & > * {
+          margin-inline: 1rem;
+          height: 2rem;
+          width: 2rem;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+        }
+      }
+
+      .contact {
+        background-color: var(--main-primary);
+        color: var(--main-primary-diff);
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+      }
+      .contact-info {
+        padding-inline: 2rem;
+        & > p {
+          display: flex;
+          align-items: center;
+          & > img {
+            margin-right: 1rem;
+            width: 1.5em;
+            height: 1.5em;
+            object-fit: cover;
+
+            border: 2px solid #fff;
+            border-radius: 50%;
+          }
+        }
+      }
+      #qrzalo {
+        margin-right: 2rem;
+        width: max-content;
+        height: 100px;
+        object-fit: cover;
+      }
+      a.beautylink {
+        text-decoration: unset;
+        font-weight: bold;
+        box-shadow: inset 0 0 0 0 var(--main-primary-diff);
+        color: var(--main-primary-diff);
+        margin: 0 0;
+        padding: 0 -1rem;
+        transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+      a.beautylink:hover {
+        box-shadow: inset 0 1.5rem 0 0 var(--main-primary-diff);
+        color: var(--main-primary);
+      }
+     
+      @media only screen and (max-width: 1000px) {
+        body {
+          margin: 0;
+        }
+        body > * {
+          padding-inline: 0 !important;
+          margin-inline: 0 !important;
+        }
+
+        .contact {
+          flex-direction: column;
+          align-items: center;
+
+          & > img {
+            width: calc(50% - 4rem) !important;
+            height: max-content !important;
+          }
+        }
+      
+      }
+      @media only screen and (max-width: 600px) {
+        .contact {
+          flex-direction: column;
+          align-items: center;
+
+          & > img {
+            width: calc(50% - 4rem) !important;
+            height: max-content !important;
+          }
+        }
+    
+      }
+
       .product {
+        margin-inline: auto;
+        display: flex;
+        flex-direction: row;
+        padding: 2rem;
+        width: 100%;
+        max-width: 750px;
+        background-color: white;
+        position: relative;
+      }
+      /* ----- Photo Section ----- */
+      .product__photo {
+        position: relative;
+        margin-right: 2rem;
+      }
+      .photo-container {
+        display: flex;
         flex-direction: column;
       }
-      .product__info{
-        padding-top: 2rem;
-        padding-left: 0;
+      .photo-main {
+        display: flex;
+        flex-direction: column;
+      }
+      .photo-main img {
+        box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+        border-radius: 16px;
+        height: 400px ;
+        width: auto;
+        aspect-ratio: 1/1;
+        object-fit: cover ;
+      }
+      .photo-album {
+        height: fit-content;
+        padding: 0.7em 1em;
+        border-radius: 0 0 6px 6px;
+        background-color: #fff;
+      }
+      .photo-album ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+        list-style: none;
+      }
+      .photo-album li {
+        width: 75px;
+        height: 75px;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 0 2px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      /* ----- Informations Section ----- */
+      .product__info {
+        height: fit-content;
+        padding: 0 2rem;
+      }
+      .title h1 {
+        margin-bottom: 0em;
+        color: #4c4c4c;
+        font-size: 1.5em;
+        font-weight: 900;
+      }
+      .title span {
+        font-size: 0.7em;
+        color: #a6a6a6;
+      }
+      .price {
+        color: #ff3f40;
+        font-size: 1.2em;
+      }
+      .price span {
+        padding-left: 0.15em;
+        font-size: 2em;
+        margin: 0;
+      }
+      .variant {
+        overflow: auto;
+      }
+      /* ----- Button Styles for Specifications ----- */
+      .spec-option {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 15px;
+        background-color: #fff;
+        color: #0172e3;
+        border: 2px solid #0172e3;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: medium;
+        font-weight: bold;
+      }
+      .spec-option:hover {
+        background-color: #b6daff;
+      }
+      .spec-option.active {
+        background-color: #0172e3;
+        color: #fff;
+      }
+
+      button{
+        font-family: "Quicksand";
+        padding: 1rem 2rem;
+        font-size: 1em;
+        &>a, a:visited{
+          font-size: large;
+          text-decoration: none !important;
+          color: var(--main-primary-diff);
+        }
+        color: var(--main-primary-diff);
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 0 10px #aaa;
+        background-color: var(--main-primary);
+
+        transition: transform .3s ease-in-out;
+        &:hover{
+          transform: scale(105%);
+        }
+      }
+
+      #home-btn{
+        color: var(--main-primary);
+      }
+      /* ----- Buy Button ----- */
+      .buy--btn {
+        border: none;
+        box-shadow: 2px 2px 25px -7px #4c4c4c;
+        cursor: pointer;
+        border-radius: 7px;
+
+        width:calc(10em + 6px);
+        height:calc(3em + 6px);
+        font-size:1.5em;
+        font-weight:bold;
+
+        position: relative;
+        bottom: -1.1rem;
       }
       .buy--btn{
-        bottom:-1rem
+            animation:slidebg 2s linear infinite;
       }
-    }
-  </style>
-</head>
-<body id="bg">
-  <section class="product">
-    <div class="product__photo">
-      <div class="photo-container">
-        <div class="photo-main">
-          <img id="mainImage" src="" alt="Product Image">
-        </div>
-        <div hidden class="photo-album">
-          <ul id="photoAlbum"></ul>
-        </div>
+
+      .container :has(button){
+        overflow: visible;
+      }
+      
+
+      @keyframes slidebg {
+        to {
+          background-position:10em;
+        }
+      }
+      /* ----- Notification Popup ----- */
+      .notification-popup {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #fff;
+        color: #000;
+        padding: 15px 20px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+      }
+      .notification-popup a {
+        color: #ff3f40;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .notification-popup a:hover {
+        text-decoration: underline;
+      }
+      #home-btn-alternative{
+        display:none;
+      }
+
+      @media only screen and (max-width: 1000px) {
+        .product{
+          flex-direction: column;
+          padding: 1rem !important;
+          &>*{
+            margin-inline: 0;
+            margin-block-start: 1rem;
+          }
+        }
+        #home-btn{
+          display: none;
+        }
+        #home-btn-alternative{
+          display: block;
+        }
+        h3{
+          margin:0;
+        }
+        #buy--btn{
+          margin-bottom: 2rem;
+        }
+      }
+      @media only screen and (max-width: 600px) {
+      
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <p>in cả thế giới !!!</p>
+        <img src="index-header.jpg" alt="" />
       </div>
     </div>
-    <div class="product__info">
-      <div class="title">
-        <button class="normal-btn"><a href="index.html">&lt; Trở về</a></button>
-        <h1 id="productName">Product Name</h1>
-        <span id="productCode">COD: 00000</span>
-      </div>
-      <div class="price">
-        <h3>Giá:</h3>
-        <span id="productPrice"></span>
-      </div>
-      <div class="variant">
-        <h3>Phân loại</h3>
-        <div id="specifications"></div>
-      </div>
-      <button id="btn-bg" class="buy--btn">Đặt in và tư vấn</button>
+    <div class="container decor-icons">
+      <img src="icon1.png" alt="" />
+      <img src="icon2.png" alt="" />
+      <img src="icon3.png" alt="" />
+      <img src="icon4.png" alt="" />
     </div>
-  </section>
-  <footer>
-    <p>&copy; 2025 by <a class="beautylink" target="_blank" href="https://github.com/nguyenanvi">@nguyenanvi</a></p>
-  </footer>
+    <div id="product" class="container product">
+      <button id="home-btn-alternative"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
+      <div class="product__photo">
+        <div class="photo-container">
+          <div class="photo-main">
+            <img id="mainImage" src="" alt="Product Image">
+          </div>
+          <div hidden class="photo-album">
+            <ul id="photoAlbum"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="product__info">
+          <button id="home-btn"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
+          <div class="title">
+            <h1 id="productName">Product Name</h1>
+            <span id="productCode">COD: 00000</span>
+          </div>
+          <div class="price">
+            <h3>Giá:</h3>
+            <span id="productPrice"></span>
+          </div>
+          <div class="variant">
+            <h3>Phân loại</h3>
+            <div id="specifications"></div>
+          </div>
+          <button id="buy--btn" class="buy--btn" disabled="disabled">Đặt in và tư vấn</button>
+        </div>
+    </div>
+    <div class="container contact">
+      <div class="contact-info">
+        <hr />
+        <p>
+          <img src="icon-phone.png" alt="" />in gì alo mình:&nbsp;&nbsp;
+          <a href="tel:+84939963285" class="beautylink">0939.963.285</a>
+        </p>
+        <p>
+          <img src="icon-zalo.png" alt="" />zalo (Quét mã - gửi
+          hình):&nbsp;&nbsp;
+          <a href="https://zalo.me/0939963285" class="beautylink"
+            >0939.963.285</a
+          >
+        </p>
+        <p>
+          <img src="icon-email.png" alt="" />email:&nbsp;&nbsp;
+          <a href="mailto:nguyenanvi122333@gmail.com" class="beautylink"
+            >nguyenanvi122333@gmail.com</a
+          >
+        </p>
+        <hr />
+        <p>
+          <a href="https://github.com/nguyenanvi" class="beautylink"
+            >web nhà làm</a
+          >&nbsp;|&nbsp; ver. 1.0
+        </p>
+      </div>
+      <img src="QR_zalo.png" alt="" id="qrzalo" />
+    </div>
 
   <script>
     let selectedSpecs = {}; // To store the user's selected specification indices
@@ -273,6 +471,7 @@
     // This function will update both the price and the displayed image(s)
     function updateDisplay(product, defaultImages, mainImage, photoAlbum) {
       const specKey = Object.values(selectedSpecs).join("_");
+      let buyButton = document.getElementById('buy--btn');
 
       // Update the price
       const productPriceElement = document.getElementById("productPrice");
@@ -283,20 +482,22 @@
       } else {
         productPriceElement.textContent = product.base_price;
       }
-
+      
       // Update the displayed image based on the specKey
       if (specKey && product.images[specKey] && product.images[specKey].length > 0) {
         mainImage.src = product.images[specKey][0];
         photoAlbum.innerHTML = product.images[specKey]
-          .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
-          .join('');
+        .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+        .join('');
+        buyButton.removeAttribute('disabled');
       } else {
         // Fallback to using default images if no spec-specific image is available
         if (defaultImages.length > 0) {
           mainImage.src = defaultImages[0];
           photoAlbum.innerHTML = defaultImages
-            .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
-            .join('');
+          .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+          .join('');
+        buyButton.setAttribute('disabled', 'disabled');
         }
       }
     }
@@ -309,7 +510,12 @@
         const product = data[id];
 
         if (!product) {
-          document.body.innerHTML = '<h1>Product not found!</h1>';
+          document.body.innerHTML = `
+          <div style="display:flex; flex-direction:column;margin-inline:auto;align-items:center;text-align:center">
+            <h1>hổng thấy sản phẩm có id=${id}</h1>
+            <button style="width: fit-content" id="home-btn"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
+          </div>
+          `;
           return;
         }
 
@@ -355,42 +561,31 @@
           specDiv.appendChild(specSection);
         }
 
-        function createHex() {
-          var hexCode1 = "";
-          var hexValues1 = "0123456789abcdef";
-          
-          for ( var i = 0; i < 6; i++ ) {
-            hexCode1 += hexValues1.charAt(Math.floor(Math.random() * hexValues1.length));
-          }
-          return hexCode1;
-        }
-
-        function generate() {
-          
-          var deg = Math.floor(Math.random() *360);
-          var gradient = "linear-gradient(" + deg + "deg, " + "#" + createHex() + ", " + "#" + createHex() +")";
-          document.getElementById("bg").style.background = gradient;
-          document.getElementById("btn-bg").style.background = gradient;
-          
-        }
-
         // CONTACT ME button functionality (captures the product section as canvas)
         document.querySelector('.buy--btn').addEventListener('click', function (e) {
           e.preventDefault();
-          html2canvas(document.querySelector('.product')).then(canvas => {
+          html2canvas(document.getElementById('product')).then(canvas => {
             const notification = document.createElement('div');
             notification.className = 'notification-popup';
             notification.innerHTML = 'Product captured, please <a href="https://zalo.me/0939963285" target="_blank">Contact me</a>';
+            
+            const link = document.createElement('a');
+            link.download = 'screenshot.png'; // File name for the download
+            link.href = canvas.toDataURL("image/png");
+            
+            // Trigger the download
+            link.click();
+
             document.body.appendChild(notification);
             setTimeout(() => notification.remove(), 15000);
           });
         });
-        document.onload = generate();
       })
       .catch(error => {
         console.error('Error loading product data:', error);
       });
 
   </script>
-</body>
+
+  </body>
 </html>
