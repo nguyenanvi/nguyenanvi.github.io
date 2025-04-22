@@ -51,6 +51,10 @@
       .container {
         background-color: var(--main-secondary);
         color: var(--main-secondary-diff);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         padding-inline: 2rem;
         padding-block: 1rem;
@@ -61,8 +65,11 @@
           font-size: medium;
         }
       }
-      .container:has(.header) {
+      .container:has(.header), .container:has(.feedback) {
         padding: 0 !important;
+        &>*{
+          max-width: none;
+        }
       }
       .container.contact {
         margin-bottom: 0;
@@ -113,22 +120,45 @@
           color: #000;
 
           width: calc(25% - 1rem);
+          /* width: calc(50% - 1rem) !important; */
           margin: 0.5rem;
           cursor: pointer;
           box-shadow: 0 0 8px #aaa;
           transition: all 0.3s ease-in-out;
 
+
           & > * {
             font-size: large;
-            padding: 4px;
             margin: 0;
+
+            &:not(img){
+              padding-inline: 0.8rem;
+
+            }
           }
 
           & > img {
             padding: 0;
             width: 100%;
+            height: auto;
             aspect-ratio: 1/1;
             object-fit: cover;
+          }
+
+          &>p{
+            text-align: right;
+            color: red;
+            margin-bottom: 0.5rem;
+          }
+
+          &>h2{
+            display: block;
+            width: 100%;
+            height: 1.5em;
+            line-height: 1.5em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
           }
 
           &:hover {
@@ -140,6 +170,7 @@
         background-color: var(--main-primary);
         color: var(--main-primary-diff);
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: end;
       }
@@ -287,7 +318,7 @@
     <div class="container">
       <div class="header">
         <p>in cả thế giới !!!</p>
-        <img src="index-header.jpg" alt="" />
+        <img id="parallax" src="header.jpg" alt="" />
       </div>
     </div>
     <div class="container decor-icons">
@@ -345,7 +376,7 @@
             card.href = "product.html?id=" + index;
             card.className = "product-card";
             card.innerHTML = `
-            <img src="${product.images.default}" />
+            <img src="${product.images.default[0]}" />
             <h2>${product.name}</h2>
             <p>${product.base_price}</p>
           `;
@@ -397,6 +428,14 @@
         .catch((error) => {
           console.error("Error fetching product data:", error);
         });
+
+        // for header background's
+        function parallax() {
+          var parallax = document.getElementById("parallax");
+          parallax.style.marginTop = -(window.pageYOffset / 2)+'px';
+        }
+
+        window.addEventListener("scroll", parallax, false);
     </script>
   </body>
 </html>

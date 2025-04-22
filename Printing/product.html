@@ -196,42 +196,59 @@
       .product__photo {
         position: relative;
         margin-right: 2rem;
+        
+        display: flex;
+        justify-content: center;
       }
       .photo-container {
         display: flex;
         flex-direction: column;
+
+        height: auto ;
+        max-width: 400px;
       }
       .photo-main {
         display: flex;
         flex-direction: column;
+        align-items: center;
       }
       .photo-main img {
         box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
         border-radius: 16px;
-        height: 400px ;
-        width: auto;
+        height: auto ;
+        width: 100%;
+        max-width: 400px;
         aspect-ratio: 1/1;
         object-fit: cover ;
       }
       .photo-album {
         height: fit-content;
-        padding: 0.7em 1em;
+        width: 100%;
+
+        overflow-x: visible;
+        padding: 0;
+
         border-radius: 0 0 6px 6px;
-        background-color: #fff;
       }
       .photo-album ul {
         display: flex;
-        justify-content: space-around;
-        padding: 0;
+        justify-content: flex-start;
         list-style: none;
+        padding: 0;
       }
       .photo-album li {
         width: 75px;
         height: 75px;
         border-radius: 8px;
         overflow: hidden;
-        margin: 0 2px;
+        margin: 0 1em 0  0;
+        padding: 0;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+        &>img{
+          width: 100%;
+          object-fit: cover;
+        }
       }
       /* ----- Informations Section ----- */
       .product__info {
@@ -448,6 +465,8 @@
       }
       #home-btn-alternative{
         display:none;
+        width: 400px;
+        margin-inline: auto;
       }
 
 
@@ -460,6 +479,14 @@
             margin-block-start: 1rem;
           }
         }
+        .product__info{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          & > *{
+          width: 400px;
+        }}
         #home-btn{
           display: none;
         }
@@ -502,7 +529,7 @@
     <div class="container">
       <div class="header">
         <p>in cả thế giới !!!</p>
-        <img src="index-header.jpg" alt="" />
+        <img id="parallax" src="header.jpg" alt="" />
       </div>
     </div>
     <div class="container decor-icons">
@@ -518,7 +545,7 @@
           <div class="photo-main">
             <img id="mainImage" src="" alt="Product Image">
           </div>
-          <div hidden class="photo-album">
+          <div class="photo-album">
             <ul id="photoAlbum"></ul>
           </div>
         </div>
@@ -586,12 +613,22 @@
 
         // Update the price
         const productPriceElement = document.getElementById("productPrice");
-        if (product.specification[specKey] !== undefined) {
+        if ((product.specification[specKey] !== undefined) && (!isNaN(product.specification[specKey]))) {
           const price = product.specification[specKey];
           productPriceElement.textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
           + "đ";
+          buyButton.removeAttribute('disabled');
+        } else if ((product.specification[specKey] !== undefined) && (isNaN(product.specification[specKey]))) {
+          const price = product.specification[specKey];
+          productPriceElement.textContent = product.specification[specKey];
+          if(product.specification[specKey] === "Không có hàng"){
+            buyButton.setAttribute('disabled', 'disabled');
+          } else{
+            buyButton.removeAttribute('disabled');
+          }
         } else {
           productPriceElement.textContent = product.base_price;
+          buyButton.setAttribute('disabled', 'disabled');
         }
         
         // Update the displayed image based on the specKey
@@ -600,7 +637,6 @@
           photoAlbum.innerHTML = product.images[specKey]
           .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
           .join('');
-          buyButton.removeAttribute('disabled');
         } else {
           // Fallback to using default images if no spec-specific image is available
           if (defaultImages.length > 0) {
@@ -608,7 +644,6 @@
             photoAlbum.innerHTML = defaultImages
             .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
             .join('');
-          buyButton.setAttribute('disabled', 'disabled');
           }
         }
       }
@@ -644,8 +679,8 @@
           if (defaultImages.length > 0) {
             mainImage.src = defaultImages[0];
             photoAlbum.innerHTML = defaultImages
-              .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
-              .join('');
+            .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+            .join('');
           }
 
           // Populate specifications – each specification will render buttons
@@ -720,6 +755,14 @@
             console.error("error closing notification:", error)
           }        
         }
+
+        // for header background's
+        function parallax() {
+          var parallax = document.getElementById("parallax");
+          parallax.style.marginTop = -(window.pageYOffset / 2)+'px';
+        }
+
+        window.addEventListener("scroll", parallax, false);
 
     </script>
   </body>
