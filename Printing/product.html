@@ -465,7 +465,8 @@
       }
       #home-btn-alternative{
         display:none;
-        width: 400px;
+        width: 100%;
+        max-width: 400px;
         margin-inline: auto;
       }
 
@@ -485,7 +486,9 @@
           justify-content: center;
           align-items: center;
           & > *{
-          width: 400px;
+          width: 100%;
+          max-width: 400px;
+          
         }}
         #home-btn{
           display: none;
@@ -521,6 +524,10 @@
             margin-top: 8px;
             text-align: center;
           }
+        }
+        .product__info{
+          margin: 0;
+          padding: 0;
         }
       }
     </style>
@@ -635,14 +642,14 @@
         if (specKey && product.images[specKey] && product.images[specKey].length > 0) {
           mainImage.src = product.images[specKey][0];
           photoAlbum.innerHTML = product.images[specKey]
-          .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+          .map(img => `<li onclick="showImage(event)"><img src="${img}" alt="Product Image"></li>`)
           .join('');
         } else {
           // Fallback to using default images if no spec-specific image is available
           if (defaultImages.length > 0) {
             mainImage.src = defaultImages[0];
             photoAlbum.innerHTML = defaultImages
-            .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+            .map(img => `<li onclick="showImage(event)"><img src="${img}" alt="Product Image"></li>`)
             .join('');
           }
         }
@@ -679,7 +686,7 @@
           if (defaultImages.length > 0) {
             mainImage.src = defaultImages[0];
             photoAlbum.innerHTML = defaultImages
-            .map(img => `<li><img src="${img}" alt="Product Image"></li>`)
+            .map(img => `<li onclick="showImage(event)"><img src="${img}" alt="Product Image"></li>`)
             .join('');
           }
 
@@ -754,6 +761,20 @@
           } catch (error) {
             console.error("error closing notification:", error)
           }        
+        }
+
+        function showImage(event) {
+            // Find the image element inside the clicked element
+            const imgElement = event.currentTarget.querySelector("img");
+
+            // Check if an image was found
+            if (imgElement) {
+                const imageSrc = imgElement.src;
+
+                document.getElementById('mainImage').setAttribute('src', imageSrc);
+            } else {
+                console.log("No image found inside the clicked element.");
+            }
         }
 
         // for header background's
