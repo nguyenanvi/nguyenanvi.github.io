@@ -206,6 +206,7 @@
 
         height: auto ;
         max-width: 400px;
+        width: 100%;
       }
       .photo-main {
         display: flex;
@@ -216,14 +217,14 @@
         box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
         border-radius: 16px;
         height: auto ;
-        width: 100%;
+        width: inherit !important;
         max-width: 400px;
         aspect-ratio: 1/1;
         object-fit: cover ;
       }
       .photo-album {
         height: fit-content;
-        width: 100%;
+        width: inherit;
 
         overflow-x: visible;
         padding: 0;
@@ -248,6 +249,12 @@
         &>img{
           width: 100%;
           object-fit: cover;
+        }
+
+        transition: transform .3s ease-in-out;
+
+        &:hover{
+          transform: scale(105%);
         }
       }
       /* ----- Informations Section ----- */
@@ -298,15 +305,18 @@
         color: #fff;
       }
 
-      button{
+      button, a[type=button], a[type=button]:visited{
+
+        display: inline-block;
+        text-decoration: none;
+
+        height: inherit;
+        width: inherit;
+
         font-family: "Quicksand";
         padding: 1rem 2rem;
-        font-size: 1em;
-        &>a, a:visited{
-          font-size: large;
-          text-decoration: none !important;
-          color: var(--main-primary-diff);
-        }
+        font-size: large;
+        
         color: var(--main-primary-diff);
         border: none;
         border-radius: 12px;
@@ -319,9 +329,6 @@
         }
       }
 
-      #home-btn{
-        color: var(--main-primary);
-      }
       /* ----- Buy Button ----- */
       .buy--btn {
         border: none;
@@ -465,6 +472,7 @@
       }
       #home-btn-alternative{
         display:none;
+        text-align: center;
         width: 100%;
         max-width: 400px;
         margin-inline: auto;
@@ -546,7 +554,7 @@
       <img src="icon4.png" alt="" />
     </div>
     <div id="product" class="container product">
-      <button id="home-btn-alternative"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
+      <a type="button" id="home-btn-alternative" href="index.html">&#127968;&nbsp; trang chủ</a>
       <div class="product__photo">
         <div class="photo-container">
           <div class="photo-main">
@@ -558,7 +566,7 @@
         </div>
       </div>
       <div class="product__info">
-          <button id="home-btn"><a href="index.html">&#127968;&nbsp; trang chủ</a></button>
+          <a id="home-btn" type="button" href="index.html">&#127968;&nbsp; trang chủ</a>
           <div class="title">
             <h1 id="productName">Product Name</h1>
             <span id="productCode">COD: 00000</span>

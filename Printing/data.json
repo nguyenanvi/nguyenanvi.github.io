@@ -54,21 +54,21 @@
       "2_0":["khongep.jpg"],
       "3_0":["khongep.jpg"],
       "4_0":["khongep.jpg"],
-      "0_1":["hologram.gif"],
-      "1_1":["hologram.gif"],
-      "2_1":["hologram.gif"],
-      "3_1":["hologram.gif"],
-      "4_1":["hologram.gif"],
+      "0_1":["hologram.gif", "hologram-1.gif"],
+      "1_1":["hologram.gif", "hologram-1.gif"],
+      "2_1":["hologram.gif", "hologram-1.gif"],
+      "3_1":["hologram.gif", "hologram-1.gif"],
+      "4_1":["hologram.gif", "hologram-1.gif"],
       "0_2":["laminate.jpg"],
       "1_2":["laminate.jpg"],
       "2_2":["laminate.jpg"],
       "3_2":["laminate.jpg"],
       "4_2":["laminate.jpg"],
-      "0_3":["laminate.jpg"],
-      "1_3":["laminate.jpg"],
-      "2_3":["laminate.jpg"],
-      "3_3":["laminate.jpg"],
-      "4_3":["laminate.jpg"]
+      "0_3":["laminate.jpg", "hologram-1.gif"],
+      "1_3":["laminate.jpg", "hologram-1.gif"],
+      "2_3":["laminate.jpg", "hologram-1.gif"],
+      "3_3":["laminate.jpg", "hologram-1.gif"],
+      "4_3":["laminate.jpg", "hologram-1.gif"]
     }
   },
   {
@@ -211,6 +211,29 @@
       "2_4_1":["A4-glossy-decal-100gsm.avif"],
       "2_4_2":["A4-glossy-decal-100gsm.avif"],
       "2_4_3":["A4-glossy-decal-100gsm.avif"]
+    }
+  },
+  {
+    "code":"003",
+    "name": "in hình thẻ",
+    "base_price": "10.000đ",
+    "currency": "VND",
+    "specifications": {
+      "Cỡ hình": ["9 tấm 2x3", "9 tấm 3x4", "5 tấm 4x6","Mix đủ cỡ"]
+    },
+    "specification": {
+      "0": 5000,
+      "1": 10000,
+      "2": 10000,
+      "3": "Giá tư vấn"
+    },
+    "images": {
+      "default":[
+        "hinhthe-default.jpg","hinhthe-1.jpg"
+      ],
+      "0":["hinhthe-2x3.jpg"],
+      "1":["hinhthe-3x4.jpg"],
+      "2":["hinhthe-4x6.jpg"]
     }
   }
 ]
