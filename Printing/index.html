@@ -1,22 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi-VN">
   <head>
-    <meta charset="UTF-8" />
-    <title>Bảng giá in ảnh - gửi hình em in lấy liền</title>
-    <link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
-    <meta name="robots" content="index, follow" />
-
-    <meta name="author" content="An Vĩ - Dịch vụ in ảnh tại An Giang" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7">
-    <meta name="description" content="Dịch vụ in ảnh giá rẻ: in ảnh 6x9, A3, A4, A5, ảnh chân dung. Ép nhựa, in lấy ngay. Gửi hình qua email, Zalo hoặc điện thoại. Liên hệ ngay!" />
-    <meta name="keywords" content="in ảnh, dịch vụ in ảnh, in ảnh lấy ngay, ép nhựa, in ảnh giá rẻ, An Giang" />
-
-    <meta property="og:title" content="Dịch vụ in ảnh tại An Giang" />
-    <meta property="og:description" content="In ảnh 6x9, A3, A4, A5, chân dung, ép nhựa, in lấy ngay. Liên hệ ngay để nhận ảnh chất lượng cao!" />
-    <meta property="og:image" content="IMG_1197.jpg" />
-    <meta property="og:url" content="https://nguyenanvi.github.io/Printing" />
-    <meta property="og:type" content="website" />
+    <title>Đang chuyển hướng...</title>
+    <meta http-equiv="refresh" content="0; url=https://shopthienvi.web.app" />
 
     <style>
       @font-face {
@@ -65,200 +51,18 @@
           font-size: medium;
         }
       }
-      .container:has(.header), .container:has(.feedback) {
-        padding: 0 !important;
-        &>*{
-          max-width: none;
-        }
-      }
-      .container.contact {
-        margin-bottom: 0;
-      }
-      .header {
-        overflow: hidden;
-        max-height: 200px;
-        height: fit-content;
-        color: #fff;
-        display: flex;
-        align-items: center;
-
-        & > img {
-          width: 100%;
-        }
-        & > p {
-          font-size: larger;
-          background-color: var(--main-primary);
-          color: var(--main-primary-diff);
-          position: absolute;
-          padding: 2rem;
-        }
-      }
-      .decor-icons {
-        background-color: transparent !important;
-        padding-block: 0 !important;
-        margin-block: 0 !important;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-
-        & > * {
-          margin-inline: 1rem;
-          height: 2rem;
-          width: 2rem;
-          aspect-ratio: 1/1;
-          object-fit: cover;
-        }
-      }
-      #product-list {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-
-        & > .product-card {
-          text-decoration: none;
-          color: #000;
-
-          width: calc(25% - 1rem);
-          /* width: calc(50% - 1rem) !important; */
-          margin: 0.5rem;
-          cursor: pointer;
-          box-shadow: 0 0 8px #aaa;
-          transition: all 0.3s ease-in-out;
-
-
-          & > * {
-            font-size: large;
-            margin: 0;
-
-            &:not(img){
-              padding-inline: 0.8rem;
-
-            }
-          }
-
-          & > img {
-            padding: 0;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-          }
-
-          &>p{
-            text-align: right;
-            color: red;
-            margin-bottom: 0.5rem;
-          }
-
-          &>h2{
-            display: block;
-            width: 100%;
-            height: 1.5em;
-            line-height: 1.5em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow:ellipsis;
-          }
-
-          &:hover {
-            transform: scale(105%);
-          }
-        }
-      }
-      .contact {
-        background-color: var(--main-primary);
-        color: var(--main-primary-diff);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: end;
-      }
-      .contact-info {
-        padding-inline: 2rem;
-        & > p {
-          display: flex;
-          align-items: center;
-          & > img {
-            margin-right: 1rem;
-            width: 1.5em;
-            height: 1.5em;
-            object-fit: cover;
-
-            border: 2px solid #fff;
-            border-radius: 50%;
-          }
-        }
-      }
-      #qrzalo {
-        margin-right: 2rem;
-        width: max-content;
-        height: 100px;
-        object-fit: cover;
-      }
       a.beautylink {
         text-decoration: unset;
         font-weight: bold;
-        box-shadow: inset 0 0 0 0 var(--main-primary-diff);
-        color: var(--main-primary-diff);
+        box-shadow: inset 0 0 0 0 var(--main-primary);
+        color: var(--main-primary);
         margin: 0 0;
         padding: 0 -1rem;
         transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       }
       a.beautylink:hover {
-        box-shadow: inset 0 1.5rem 0 0 var(--main-primary-diff);
-        color: var(--main-primary);
-      }
-      .stars {
-        display: inline-flex;
-        cursor: pointer;
-      }
-
-      .star {
-        font-size: 1em;
-        color: lightgray;
-      }
-
-      .star.filled {
-        color: gold;
-      }
-      .feedback-list {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-      }
-      .feedback {
-        width: auto;
-        padding: 1rem;
-        margin: 1rem;
-        box-shadow: 0 0 10px #aaa;
-
-        & > .feedbacker {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-
-          & > * {
-            display: flex;
-            align-items: center;
-          }
-
-          & > .feedbacker-info {
-            & > img {
-              margin-right: 1rem;
-              height: 2rem;
-              width: 2rem;
-              object-fit: cover;
-              border-radius: 1rem;
-            }
-          }
-        }
-        & > .comment {
-          font-size: small;
-          text-align: justify;
-          padding-top: 1rem;
-          text-indent: 1rem;
-        }
+        box-shadow: inset 0 1.5rem 0 0 var(--main-primary);
+        color: var(--main-primary-diff);
       }
       @media only screen and (max-width: 1000px) {
         body {
@@ -268,173 +72,13 @@
           padding-inline: 0 !important;
           margin-inline: 0 !important;
         }
-        .feedback-list{
-          overflow-x: visible;
-        }
-        .contact {
-          flex-direction: column;
-          align-items: center;
-
-          & > img {
-            width: calc(50% - 4rem) !important;
-            height: max-content !important;
-          }
-        }
         
-      }
-      @media only screen and (max-width: 600px) {
-        .product-card {
-          width: calc(50% - 1rem) !important;
-
-          & > img {
-            height: 100px;
-          }
-          & > * {
-            font-size: medium;
-            padding: 4px;
-            margin: 0;
-          }
-        }
-        .contact {
-          flex-direction: column;
-          align-items: center;
-
-          & > img {
-            width: calc(50% - 4rem) !important;
-            height: max-content !important;
-          }
-        }
-        
-        .feedback-list {
-          margin-inline: auto;
-          flex-direction: column;
-          max-width: 500px;
-        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="header">
-        <p>in cả thế giới !!!</p>
-        <img id="parallax" src="header.jpg" alt="" />
-      </div>
+      <p>If you are not redirected automatically, follow this <a class="beautylink" href="https://shopthienvi.web.app">link</a>.</p>
     </div>
-    <div class="container decor-icons">
-      <img src="icon1.png" alt="" />
-      <img src="icon2.png" alt="" />
-      <img src="icon3.png" alt="" />
-      <img src="icon4.png" alt="" />
-    </div>
-    <div class="container">
-      <h1>các sản phẩm in ấn</h1>
-      <div id="product-list"></div>
-    </div>
-    <div class="container">
-      <h1>Tự hào mang lại dịch vụ in ấn tốt nhất</h1>
-      <div id="feedback" class="feedback-list"></div>
-    </div>
-    <div class="container contact">
-      <div class="contact-info">
-        <hr />
-        <p>
-          <img src="icon-phone.png" alt="" />in gì alo mình:&nbsp;&nbsp;
-          <a href="tel:+84939963285" class="beautylink">0939.963.285</a>
-        </p>
-        <p>
-          <img src="icon-zalo.png" alt="" />zalo (Quét mã - gửi
-          hình):&nbsp;&nbsp;
-          <a href="https://zalo.me/0939963285" class="beautylink"
-            >0939.963.285</a
-          >
-        </p>
-        <p>
-          <img src="icon-email.png" alt="" />email:&nbsp;&nbsp;
-          <a href="mailto:nguyenanvi122333@gmail.com" class="beautylink"
-            >nguyenanvi122333@gmail.com</a
-          >
-        </p>
-        <hr />
-        <p>
-          <a href="https://github.com/nguyenanvi" class="beautylink"
-            >web nhà làm</a
-          >&nbsp;|&nbsp; ver. 1.0
-        </p>
-      </div>
-      <img src="QR_zalo.png" alt="" id="qrzalo" />
-    </div>
-
-    <script>
-      // Fetch product data and populate product cards.
-      fetch("./data.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const productList = document.getElementById("product-list");
-          data.forEach((product, index) => {
-            const card = document.createElement("a");
-            card.href = "product.html?id=" + index;
-            card.className = "product-card";
-            card.innerHTML = `
-            <img src="${product.images.default[0]}" />
-            <h2>${product.name}</h2>
-            <p>${product.base_price}</p>
-          `;
-            productList.appendChild(card);
-          });
-        })
-        .catch((error) => {
-          console.error("Error fetching product data:", error);
-        });
-
-      fetch("./feedback.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const feedbackList = document.getElementById("feedback");
-          data.forEach((feedback, index) => {
-            const card = document.createElement("div");
-            card.className = "feedback";
-            card.innerHTML = `
-            <div class="feedbacker">
-              <div class="feedbacker-info">
-                <img src="${feedback.avatar}" alt="" class="feedbacker-avt">
-                <span class="feedbacker-name">${feedback.name}</span>
-              </div>
-              <div class="stars-rating" >
-                  <span class="star${
-                    feedback.score >= 1 ? " filled" : ""
-                  }" data-value="1">&#9733;</span>
-                  <span class="star${
-                    feedback.score >= 2 ? " filled" : ""
-                  }" data-value="2">&#9733;</span>
-                  <span class="star${
-                    feedback.score >= 3 ? " filled" : ""
-                  }" data-value="3">&#9733;</span>
-                  <span class="star${
-                    feedback.score >= 4 ? " filled" : ""
-                  }" data-value="4">&#9733;</span>
-                  <span class="star${
-                    feedback.score == 5 ? " filled" : ""
-                  }" data-value="5">&#9733;</span>
-                  <span>&nbsp;&nbsp;(${feedback.score})</span>
-              </div>
-            </div>
-            <hr/>
-            <div class="comment">${feedback.comment}</div>`;
-
-            feedbackList.appendChild(card);
-          });
-        })
-        .catch((error) => {
-          console.error("Error fetching product data:", error);
-        });
-
-        // for header background's
-        function parallax() {
-          var parallax = document.getElementById("parallax");
-          parallax.style.marginTop = -(window.pageYOffset / 2)+'px';
-        }
-
-        window.addEventListener("scroll", parallax, false);
-    </script>
   </body>
 </html>
